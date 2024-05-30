@@ -1,4 +1,4 @@
-import express, {Response} from "express";
+import express, { Response } from "express";
 import router from "./routes";
 
 const app = express();
