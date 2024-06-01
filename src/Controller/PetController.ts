@@ -13,7 +13,7 @@ function geraId() {
 }
 
 export default class PetController {
-  constructor(private readonly petRepository: PetRepository) {}
+  constructor(private readonly repository: PetRepository) {}
 
   criaPet(req: Request, res: Response) {
     const { nome, especie, adotado, dataDeNascimento } = <PetEntity>req.body;
@@ -30,41 +30,36 @@ export default class PetController {
       dataDeNascimento,
     };
 
-    this.petRepository.CriaPet(novoPet);
+    this.repository.CriaPet(novoPet);
     return res.status(201).json(novoPet);
   }
 
-  listaPets(req: Request, res: Response) {
+  async listaPets(req: Request, res: Response) {
+    const listaDePets = await this.repository.listaPets();
     return res.status(200).json(listaDePets);
   }
 
-  atualizaPet(req: Request, res: Response) {
+  async atualizaPet(req: Request, res: Response) {
     const { id } = req.params;
-    const { nome, especie, adotado, dataDeNascimento } = <TipoPet>req.body;
+    const { success, message } = await this.repository.atualizaPet(
+      Number(id),
+      req.body as PetEntity,
+    );
 
-    if (Object.values(EnumEspecie).includes(especie)) {
-      return res.status(400).json({ mensagem: "Espécie inválida" });
+    if (!success) {
+      return res.status(404).json({ message });
     }
-
-    const pet = listaDePets.find((pet) => pet.id === Number(id));
-    if (!pet) {
-      return res.status(404).json({ mensagem: "Pet não encontrado" });
-    }
-
-    Object.assign(pet, { nome, especie, adotado, dataDeNascimento });
-
-    return res.status(200).json(pet);
+    return res.sendStatus(204);
   }
 
-  deletaPet(req: Request, res: Response) {
+  async deletaPet(req: Request, res: Response) {
     const { id } = req.params;
-    const petIndex = listaDePets.findIndex((pet) => pet.id === Number(id));
-    if (petIndex === -1) {
-      return res.status(404).json({ mensagem: "Pet não encontrado" });
+
+    const { success, message } = await this.repository.deletaPet(Number(id));
+
+    if (!success) {
+      return res.status(404).json({ message });
     }
-
-    listaDePets.splice(petIndex, 1);
-
-    return res.status(200).json({ mensagem: "Pet deletado com sucesso" });
+    return res.sendStatus(204);
   }
 }

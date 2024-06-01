@@ -1,8 +1,11 @@
 import PetEntity from "../../PetEntity";
 
 export default interface InterfacePetRepository {
-    CriaPet(pet: PetEntity): void
-    listaPets(): PetEntity[]
-    atualizaPet(pet: PetEntity): void
-    deletaPet(id: number): void
+  CriaPet(pet: PetEntity): void | Promise<void>;
+  listaPets(): PetEntity[] | Promise<PetEntity[]>;
+  atualizaPet(
+    id: number,
+    pet: PetEntity,
+  ): void | Promise<{ success: boolean; message?: string }>;
+  deletaPet(id: number): void | Promise<{ success: boolean; message?: string }>;
 }
