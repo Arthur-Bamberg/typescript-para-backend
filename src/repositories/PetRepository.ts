@@ -9,8 +9,8 @@ export default class PetRepository implements InterfacePetRepository {
     this.repository = repository;
   }
 
-  CriaPet(pet: PetEntity): void {
-    this.repository.save(pet);
+  async CriaPet(pet: PetEntity): Promise<void> {
+    await this.repository.save(pet);
   }
 
   async listaPets(): Promise<PetEntity[]> {

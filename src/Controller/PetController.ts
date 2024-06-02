@@ -4,33 +4,19 @@ import EnumEspecie from "../enum/EnumEspecie";
 import PetRepository from "../repositories/PetRepository";
 import PetEntity from "../PetEntity";
 
-let listaDePets: TipoPet[] = [];
-
-let id = 0;
-function geraId() {
-  id++;
-  return id;
-}
-
 export default class PetController {
   constructor(private readonly repository: PetRepository) {}
 
-  criaPet(req: Request, res: Response) {
+  async criaPet(req: Request, res: Response) {
     const { nome, especie, adotado, dataDeNascimento } = <PetEntity>req.body;
 
     if (!Object.values(EnumEspecie).includes(especie)) {
       return res.status(400).json({ mensagem: "Espécie inválida" });
     }
 
-    const novoPet: PetEntity = {
-      id: geraId(),
-      nome,
-      especie,
-      adotado,
-      dataDeNascimento,
-    };
+    const novoPet = new PetEntity(nome, especie, dataDeNascimento, adotado);
 
-    this.repository.CriaPet(novoPet);
+    await this.repository.CriaPet(novoPet);
     return res.status(201).json(novoPet);
   }
 
