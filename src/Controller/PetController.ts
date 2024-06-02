@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import type TipoPet from "../tipos/TipoPet";
 import EnumEspecie from "../enum/EnumEspecie";
 import PetRepository from "../repositories/PetRepository";
-import PetEntity from "../PetEntity";
+import PetEntity from "../entities/PetEntity";
 
 export default class PetController {
   constructor(private readonly repository: PetRepository) {}

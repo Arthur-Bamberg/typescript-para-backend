@@ -1,4 +1,4 @@
-import PetEntity from "../../PetEntity";
+import PetEntity from "../../entities/PetEntity";
 
 export default interface InterfacePetRepository {
   CriaPet(pet: PetEntity): void | Promise<void>;

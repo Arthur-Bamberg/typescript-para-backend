@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import EnumEspecie from "./enum/EnumEspecie";
+import EnumEspecie from "../enum/EnumEspecie";
 
 @Entity()
 export default class PetEntity {
