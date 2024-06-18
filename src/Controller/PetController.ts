@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import type TipoPet from "../tipos/TipoPet";
 import EnumEspecie from "../enum/EnumEspecie";
 import PetRepository from "../repositories/PetRepository";
 import PetEntity from "../entities/PetEntity";
+import EnumPorte from "../enum/EnumPorte";
 
 export default class PetController {
   constructor(private readonly repository: PetRepository) {}
@@ -10,8 +10,12 @@ export default class PetController {
   async criaPet(req: Request, res: Response) {
     const { nome, especie, dataDeNascimento, porte } = <PetEntity>req.body;
 
-    if (!Object.values(EnumEspecie).includes(especie)) {
+    if (!(especie in EnumEspecie)) {
       return res.status(400).json({ mensagem: "Espécie inválida" });
+    }
+
+    if (porte && !(porte in EnumPorte)) {
+      return res.status(400).json({ mensagem: "Porte inválido" });
     }
 
     const novoPet = new PetEntity(

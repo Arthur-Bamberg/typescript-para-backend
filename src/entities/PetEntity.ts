@@ -15,8 +15,8 @@ export default class PetEntity {
   dataDeNascimento: Date;
   @Column()
   adotado: boolean;
-  @Column()
-  porte: EnumPorte;
+  @Column({ nullable: true })
+  porte?: EnumPorte;
   @ManyToOne(() => AdotanteEntity, (adotante) => adotante.pets)
   adotante!: AdotanteEntity;
 
@@ -25,7 +25,7 @@ export default class PetEntity {
     especie: EnumEspecie,
     dataDeNascimento: Date,
     adotado: boolean,
-    porte: EnumPorte,
+    porte?: EnumPorte,
   ) {
     this.nome = nome;
     this.especie = especie;
