@@ -2,6 +2,7 @@ import { Repository } from "typeorm";
 import PetEntity from "../entities/PetEntity";
 import InterfacePetRepository from "./interfaces/InterfacePetRepository";
 import AdotanteEntity from "../entities/AdotanteEntity";
+import EnumPorte from "../enum/EnumPorte";
 
 export default class PetRepository implements InterfacePetRepository {
   private readonly petRepository: Repository<PetEntity>;
@@ -94,5 +95,10 @@ export default class PetRepository implements InterfacePetRepository {
         message: "Ocorreu um erro ao tentar excluir o pet.",
       };
     }
+  }
+
+  async buscaPetPeloPorte(porte: EnumPorte): Promise<PetEntity[]> {
+    const pets = await this.petRepository.find({ where: { porte } });
+    return pets;
   }
 }
