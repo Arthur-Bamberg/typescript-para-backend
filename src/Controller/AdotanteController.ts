@@ -2,10 +2,17 @@ import AdotanteEntity from "../entities/AdotanteEntity";
 import EnderecoEntity from "../entities/EnderecoEntity";
 import AdotanteRepository from "../repositories/AdotanteRepository";
 import { Request, Response } from "express";
+import {
+  TipoRequestBodyAdotante,
+  TipoResponseBodyAdotante,
+} from "../tipos/tiposAdotante";
 
 export default class AdotanteController {
   constructor(private readonly repository: AdotanteRepository) {}
-  async criaAdotante(req: Request, res: Response) {
+  async criaAdotante(
+    req: Request<{}, {}, TipoRequestBodyAdotante>,
+    res: Response<TipoResponseBodyAdotante>,
+  ) {
     try {
       const { nome, celular, endereco, foto, senha } = <AdotanteEntity>req.body;
 
@@ -18,9 +25,11 @@ export default class AdotanteController {
       );
 
       await this.repository.criaAdotante(novoAdotante);
-      return res.status(201).json(novoAdotante);
+      return res
+        .status(201)
+        .json({ data: { id: novoAdotante.id, nome, celular } });
     } catch (error) {
-      return res.status(500).json({ error: "Erro ao criar o adotante" });
+      // return res.status(500).json({ error: "Erro ao criar o adotante" });
     }
   }
 
