@@ -1,7 +1,8 @@
-import express from "express";
+import express, { RequestHandler } from "express";
 import AdotanteRepository from "../repositories/AdotanteRepository";
 import { AppDataSource } from "../config/dataSource";
 import AdotanteController from "../Controller/AdotanteController";
+import { middlewareValidadorBodyAdotante } from "../middleware/validadores/adotanteRequestBody";
 
 const router = express.Router();
 const adotanteRepository = new AdotanteRepository(
@@ -9,7 +10,12 @@ const adotanteRepository = new AdotanteRepository(
 );
 const adotanteController = new AdotanteController(adotanteRepository);
 
-router.post("/", (req, res) => adotanteController.criaAdotante(req, res));
+const validateBody: RequestHandler = (req, res, next) =>
+  middlewareValidadorBodyAdotante(req, res, next);
+
+router.post("/", validateBody, (req, res) =>
+  adotanteController.criaAdotante(req, res),
+);
 
 router.get("/", (req, res) => adotanteController.listaAdotantes(req, res));
 
