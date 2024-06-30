@@ -28,9 +28,9 @@ export default class AdotanteController {
       await this.repository.criaAdotante(novoAdotante);
       return res
         .status(201)
-        .json({ data: { id: novoAdotante.id, nome, celular, endereco } });
-    } catch (error) {
-      // return res.status(500).json({ error: "Erro ao criar o adotante" });
+        .json({ dados: { id: novoAdotante.id, nome, celular, endereco } });
+    } catch (erros) {
+      // return res.status(500).json({ erros: "Erro ao criar o adotante" });
     }
   }
 
@@ -45,7 +45,7 @@ export default class AdotanteController {
     );
 
     if (!success) {
-      return res.status(404).json({ error: message });
+      return res.status(404).json({ erros: message });
     }
 
     return res.sendStatus(204);
@@ -57,7 +57,7 @@ export default class AdotanteController {
   ) {
     const listaDeAdotantes = await this.repository.listaAdotantes();
 
-    const data = listaDeAdotantes.map((adotante) => {
+    const dados = listaDeAdotantes.map((adotante) => {
       return {
         id: adotante.id,
         nome: adotante.nome,
@@ -66,7 +66,7 @@ export default class AdotanteController {
       };
     });
 
-    return res.json({ data });
+    return res.json({ dados });
   }
 
   async deletaAdotante(
@@ -80,7 +80,7 @@ export default class AdotanteController {
     );
 
     if (!success) {
-      return res.status(404).json({ error: message });
+      return res.status(404).json({ erros: message });
     }
     return res.sendStatus(204);
   }
@@ -97,7 +97,7 @@ export default class AdotanteController {
     );
 
     if (!success) {
-      return res.status(404).json({ error: message });
+      return res.status(404).json({ erros: message });
     }
     return res.sendStatus(204);
   }

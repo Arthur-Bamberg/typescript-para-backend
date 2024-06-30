@@ -19,11 +19,11 @@ export default class PetController {
     const { nome, especie, dataDeNascimento, porte } = <PetEntity>req.body;
 
     if (!(especie in EnumEspecie)) {
-      return res.status(400).json({ error: "Espécie inválida" });
+      return res.status(400).json({ erros: "Espécie inválida" });
     }
 
     if (porte && !(porte in EnumPorte)) {
-      return res.status(400).json({ error: "Porte inválido" });
+      return res.status(400).json({ erros: "Porte inválido" });
     }
 
     const novoPet = new PetEntity(
@@ -37,7 +37,7 @@ export default class PetController {
     await this.repository.CriaPet(novoPet);
     return res
       .status(201)
-      .json({ data: { id: novoPet.id, nome, especie, porte } });
+      .json({ dados: { id: novoPet.id, nome, especie, porte } });
   }
 
   async adotaPet(
@@ -50,7 +50,7 @@ export default class PetController {
       Number(id_adotante),
     );
     if (!success) {
-      return res.status(404).json({ error: message });
+      return res.status(404).json({ erros: message });
     }
     return res.sendStatus(204);
   }
@@ -61,7 +61,7 @@ export default class PetController {
   ) {
     const listaDePets = await this.repository.listaPets();
 
-    const data = listaDePets.map((pet) => {
+    const dados = listaDePets.map((pet) => {
       return {
         id: pet.id,
         nome: pet.nome,
@@ -70,7 +70,7 @@ export default class PetController {
       };
     });
 
-    return res.status(200).json({ data });
+    return res.status(200).json({ dados });
   }
 
   async atualizaPet(
@@ -84,7 +84,7 @@ export default class PetController {
     );
 
     if (!success) {
-      return res.status(404).json({ error: message });
+      return res.status(404).json({ erros: message });
     }
     return res.sendStatus(204);
   }
@@ -98,7 +98,7 @@ export default class PetController {
     const { success, message } = await this.repository.deletaPet(Number(id));
 
     if (!success) {
-      return res.status(404).json({ error: message });
+      return res.status(404).json({ erros: message });
     }
     return res.sendStatus(204);
   }
@@ -112,6 +112,6 @@ export default class PetController {
       campo as keyof PetEntity,
       valor as string,
     );
-    return res.status(200).json({ data: listaDePets });
+    return res.status(200).json({ dados: listaDePets });
   }
 }

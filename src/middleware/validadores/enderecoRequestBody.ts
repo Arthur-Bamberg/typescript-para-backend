@@ -1,6 +1,9 @@
 import * as yup from "yup";
 import { Request, Response, NextFunction } from "express";
 import EnderecoEntity from "../../entities/EnderecoEntity";
+import { pt } from "yup-locale-pt";
+
+yup.setLocale(pt);
 
 const esquemaBodyEndereco: yup.ObjectSchema<Omit<EnderecoEntity, "id">> =
   yup.object({
@@ -28,6 +31,6 @@ export const middlewareValidadorBodyEndereco = async (
       if (error.path) ValidationErrors[error.path] = error.message;
     });
 
-    return res.status(400).json({ error: ValidationErrors });
+    return res.status(400).json({ erros: ValidationErrors });
   }
 };
