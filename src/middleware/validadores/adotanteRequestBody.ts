@@ -6,7 +6,14 @@ const esquemaBodyAdotante: yup.ObjectSchema<
   Omit<TipoRequestBodyAdotante, "endereco">
 > = yup.object({
   nome: yup.string().defined().required(),
-  celular: yup.string().defined().required(),
+  celular: yup
+    .string()
+    .defined()
+    .required()
+    .matches(
+      /(?:\(?)(\d{2})(?:\)? ?)(9?\d{4})(?:-)?(\d{4})/g,
+      "celular inválido",
+    ),
   senha: yup.string().defined().required().min(6),
   foto: yup.string().optional(),
 });
