@@ -14,13 +14,15 @@ export default class PetController {
     req: Request<TipoRequestParamsPet, {}, TipoRequestBodyPet>,
     res: Response<TipoResponseBodyPet>,
   ) {
-    const { nome, especie, dataDeNascimento, porte } = <PetEntity>req.body;
+    const { nome, especie, dataDeNascimento, porte, adotado } = <PetEntity>(
+      req.body
+    );
 
     const novoPet = new PetEntity(
       nome,
       especie,
       dataDeNascimento,
-      false,
+      adotado,
       porte,
     );
 
