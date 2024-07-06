@@ -1,0 +1,344 @@
+{
+  "info": {
+    "_postman_id": "30a31df1-6a92-4f74-b540-21abf2a83e8b",
+    "name": "Adopet",
+    "description": "### Descrição da Collection do Postman: Adopet\n\nA collection \"Adopet\" foi criada para gerenciar e testar as funcionalidades de uma API voltada para adoção de animais de estimação. Esta collection inclui várias requisições organizadas que permitem a criação, listagem, atualização e deleção de pets, adotantes e abrigos.\n\n#### Estrutura da Collection:\n\n1. **Cria Pet**:\n    \n    - **Método**: POST\n        \n    - **URL**: `{{baseUrl}}/pets`\n        \n    - **Body**: Cria um novo pet com os campos `especie`, `nome`, `dataDeNascimento`, `porte`, e `adotado`.\n        \n2. **Cria Adotante**:\n    \n    - **Método**: POST\n        \n    - **URL**: `{{baseUrl}}/adotantes`\n        \n    - **Body**: Cria um novo adotante com os campos `nome`, `senha`, e `celular`.\n        \n3. **Cria Abrigo**:\n    \n    - **Método**: POST\n        \n    - **URL**: `{{baseUrl}}/abrigos`\n        \n    - **Body**: Cria um novo abrigo com os campos `nome`, `email`, `senha`, e `celular`.\n        \n4. **Lista Adotantes**:\n    \n    - **Método**: GET\n        \n    - **URL**: `{{baseUrl}}/adotantes`\n        \n    - **Body**: Lista todos os adotantes (desabilita a poda do corpo na resposta).\n        \n5. **Lista Abrigos**:\n    \n    - **Método**: GET\n        \n    - **URL**: `{{baseUrl}}/abrigos`\n        \n    - **Body**: Lista todos os abrigos (desabilita a poda do corpo na resposta).\n        \n6. **Atualiza Adotante Endereço**:\n    \n    - **Método**: PATCH\n        \n    - **URL**: `{{baseUrl}}/adotantes/1`\n        \n    - **Body**: Atualiza o endereço de um adotante específico com os campos `estado` e `cidade`.\n        \n7. **Atualiza Abrigo Endereço**:\n    \n    - **Método**: PATCH\n        \n    - **URL**: `{{baseUrl}}/abrigos/1`\n        \n    - **Body**: Atualiza o endereço de um abrigo específico com os campos `estado` e `cidade`.\n        \n8. **Atualiza Pet**:\n    \n    - **Método**: PUT\n        \n    - **URL**: `{{baseUrl}}/pets/1`\n        \n    - **Body**: Atualiza um pet específico com os campos `id`, `nome`, `especie`, `idade`, e `adotado`.\n        \n9. **Atualiza Adotante do Pet**:\n    \n    - **Método**: PUT\n        \n    - **URL**: `{{baseUrl}}/pets/1/1`\n        \n    - **Body**: Atualiza o adotante de um pet específico.\n        \n10. **Atualiza Abrigo do Pet**:\n    \n    - **Método**: PUT\n        \n    - **URL**: `{{baseUrl}}/abrigos/1/1`\n        \n    - **Body**: Atualiza o abrigo de um pet específico.\n        \n11. **Deleta Pet**:\n    \n    - **Método**: DELETE\n        \n    - **URL**: `{{baseUrl}}/pets/1`\n        \n    - **Body**: Deleta um pet específico com os campos `id`, `nome`, `especie`, `idade`, e `adotado`.\n        \n12. **Lista Pets**:\n    \n    - **Método**: GET\n        \n    - **URL**: `{{baseUrl}}/pets`\n        \n    - **Body**: Lista todos os pets (desabilita a poda do corpo na resposta).\n        \n13. **Lista Pets com Filtro**:\n    \n    - **Método**: GET\n        \n    - **URL**: `{{baseUrl}}/pets/filtro?campo=porte&valor=pequeno`\n        \n    - **Body**: Lista os pets com filtro específico para `porte` igual a `pequeno`.\n        \n\n#### Variáveis Utilizadas:\n\n- **baseUrl**: Define a URL base para todas as requisições (`http://localhost:3000`).\n    \n\nEsta collection é projetada para facilitar o desenvolvimento e testes de endpoints da API Adopet, garantindo que todas as operações principais possam ser verificadas facilmente.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "26331696"
+  },
+  "item": [
+    {
+      "name": "Cria pet",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"especie\": \"cachorro\",\r\n    \"nome\": \"Lili\",\r\n    \"dataDeNascimento\": \"2000-10-31T01:30:00.000-05:00\",\r\n    \"porte\": \"pequeno\",\r\n    \"adotado\": false\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/pets",
+          "host": ["{{baseUrl}}"],
+          "path": ["pets"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Cria adotante",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nome\": \"Arthur\",\r\n    \"senha\": \"*Senha123\",\r\n    \"celular\": \"5551999999999\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/adotantes",
+          "host": ["{{baseUrl}}"],
+          "path": ["adotantes"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Cria abrigo",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nome\": \"Abrigo Pet Niterói\",\r\n    \"email\": \"contato@abrigo-pet-niteroi.com\",\r\n    \"senha\": \"*Senha123\",\r\n    \"celular\": \"5551999999998\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/abrigos",
+          "host": ["{{baseUrl}}"],
+          "path": ["abrigos"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Lista adotantes",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nome\": \"Arthur\",\r\n    \"senha\": \"1234\",\r\n    \"celular\": \"5551999999999\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/adotantes",
+          "host": ["{{baseUrl}}"],
+          "path": ["adotantes"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Lista abrigos",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nome\": \"Arthur\",\r\n    \"senha\": \"1234\",\r\n    \"celular\": \"5551999999999\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/abrigos",
+          "host": ["{{baseUrl}}"],
+          "path": ["abrigos"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Atualiza adotante endereço",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"estado\": \"Rio Grande do Sul\",\r\n    \"cidade\": \"Canoas\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/adotantes/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["adotantes", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Atualiza abrigo endereço",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"estado\": \"Rio Grande do Sul\",\r\n    \"cidade\": \"Canoas\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/abrigos/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["abrigos", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Atualiza pet",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\": 1,\r\n    \"nome\": \"Lili\",\r\n    \"especie\": \"vira-lata\",\r\n    \"idade\": 13,\r\n    \"adotado\": true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/pets/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["pets", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Atualiza adotante do pet",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/pets/1/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["pets", "1", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Atualiza abrigo do pet",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\": 1,\r\n    \"nome\": \"Lili\",\r\n    \"especie\": \"vira-lata\",\r\n    \"idade\": 13,\r\n    \"adotado\": true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/abrigos/1/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["abrigos", "1", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "deleta pet",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\": 1,\r\n    \"nome\": \"Lili\",\r\n    \"especie\": \"vira-lata\",\r\n    \"idade\": 13,\r\n    \"adotado\": true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/pets/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["pets", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Lista pets",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/pets",
+          "host": ["{{baseUrl}}"],
+          "path": ["pets"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Lista pets com filtro",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\": 1,\r\n    \"nome\": \"Lili\",\r\n    \"especie\": \"vira-lata\",\r\n    \"idade\": 13,\r\n    \"adotado\": true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/pets/filtro?campo=porte&valor=pequeno",
+          "host": ["{{baseUrl}}"],
+          "path": ["pets", "filtro"],
+          "query": [
+            {
+              "key": "campo",
+              "value": "porte"
+            },
+            {
+              "key": "valor",
+              "value": "pequeno"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ]
+}
