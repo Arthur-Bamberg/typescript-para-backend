@@ -1,4 +1,4 @@
-# Adopet 🚀
+# Adopet 🐾
 
 Bem-vindo ao repositório **Adopet**! Este projeto é uma introdução prática ao uso do TypeScript no desenvolvimento backend, com o objetivo de criar um API para adoção de animais. 🌟
 
@@ -35,13 +35,13 @@ Siga os passos abaixo para configurar o projeto localmente:
 1. Clone o repositório:
 
    ```sh
-   git clone https://github.com/Arthur-Bamberg/typescript-para-backend.git
+   git clone https://github.com/Arthur-Bamberg/adopet.git
    ```
 
 2. Navegue até o diretório do projeto:
 
    ```sh
-   cd typescript-para-backend
+   cd adopet
    ```
 
 3. Instale as dependências:
@@ -69,8 +69,7 @@ O servidor estará disponível em `http://localhost:3000`. 🎉
 
 A estrutura do projeto é organizada da seguinte forma:
 
-```
-.
+```plaintext
 ├── src
 │   ├── controllers
 │   ├── middlewares
